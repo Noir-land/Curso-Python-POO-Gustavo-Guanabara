@@ -76,4 +76,3 @@ class ControleRemoto:
 
 pessoa1 = ControleRemoto()
 pessoa1.tv()
-pessoa1.comando()
