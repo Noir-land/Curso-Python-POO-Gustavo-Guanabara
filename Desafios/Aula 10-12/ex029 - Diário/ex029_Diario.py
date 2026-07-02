@@ -15,7 +15,7 @@ _____________________
 
 
 class Diario:
-    def __init__(self, senha=1234):
+    def __init__(self, senha='1234'):
         self.__segredos = list()
         self.__senha = senha
 
@@ -23,9 +23,9 @@ class Diario:
         return self.__segredos.append(msg)
 
     def ler(self, msg=0):
-        if msg == self.__senha:
+        if str(msg) == self.__senha:
             print('Senha aceita.')
             for i in self.__segredos:
                 print(f'- {i}')
         else:
-            print('senha invalida')
+            raise PermissionError('Senha invalida!')

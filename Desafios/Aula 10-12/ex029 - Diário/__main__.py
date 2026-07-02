@@ -5,8 +5,10 @@ def main():
     pessoa = Diario()
     pessoa.escrever('olá')
     pessoa.escrever('GEm')
-    pessoa.ler(1234)
-
+    try:
+        pessoa.ler(123)
+    except Exception as e:
+        print(f'{e}')
 
 if __name__ == '__main__':
     main()
