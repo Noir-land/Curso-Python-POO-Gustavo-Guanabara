@@ -14,6 +14,7 @@ _____________________
 '''
 from getpass import getpass
 
+
 class Diario:
     def __init__(self, senha='1234'):
         self.__segredos = list()
@@ -35,4 +36,5 @@ class Diario:
     def senha(self, msg=''):
         senha = getpass('Digite a senha atual: ', echo_char='*').strip()
         if senha == self.__senha:
-            self.__senha = getpass('Digite a nova senha: ',echo_char='*').strip()
+            self.__senha = getpass(
+                'Digite a nova senha: ', echo_char='*').strip()

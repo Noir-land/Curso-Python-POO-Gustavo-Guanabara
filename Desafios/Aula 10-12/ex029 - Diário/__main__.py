@@ -11,9 +11,8 @@ def main():
         print(f'{e}')
 
     pessoa.senha()
-     
     pessoa.ler()
-   
-    
+
+
 if __name__ == '__main__':
     main()
