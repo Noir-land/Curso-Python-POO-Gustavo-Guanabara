@@ -10,5 +10,10 @@ def main():
     except Exception as e:
         print(f'{e}')
 
+    pessoa.senha()
+     
+    pessoa.ler()
+   
+    
 if __name__ == '__main__':
     main()
