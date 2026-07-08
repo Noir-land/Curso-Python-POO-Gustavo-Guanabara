@@ -3,9 +3,9 @@ from ex032_ContaBancariaSegura import *
 
 def main():
 
-    pessoa = ContaBancaria(123, 'CRk', 1000, 'brito')
+    pessoa = ContaBancaria(123, 'CRk', 1000)
     pessoa.sacar(500)
-    pessoa.depositar()
+    pessoa.depositar(200)
     inspect(pessoa, private=True, methods=True)
 
 
