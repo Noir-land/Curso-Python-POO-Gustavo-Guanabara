@@ -1,4 +1,5 @@
-from ex031 import*
+from ex031_Retangulo_Validacao import *
+
 
 def main():
     r = Retangulo()
@@ -7,3 +8,7 @@ def main():
 
     print(r.medidas)
     inspect(r, private=True, methods=True)
+
+
+if __name__ == '__main__':
+    main()
