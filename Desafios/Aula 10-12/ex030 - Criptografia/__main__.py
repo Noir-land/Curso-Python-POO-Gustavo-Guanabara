@@ -4,8 +4,7 @@ from ex030_Criptografia import *
 def main():
     pessoa = Credencial()
     pessoa.senha = ''
-    senha = getpass('Digite a senha: ', echo_char='*')
-    pessoa.validar(senha)
+    pessoa.validar(getpass('Digite a senha: ', echo_char='*'))
 
 
 if __name__ == '__main__':
