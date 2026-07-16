@@ -65,8 +65,8 @@ class ContaBancaria:
 
     def sacar(self, valor: float = 0, chave=None):
         valor = abs(valor)
+        chave = sha256(getpass('Digite a senha de verificação de saque: ', echo_char='*').encode('utf-8')).hexdigest()
         if chave is None:
-            chave = sha256(getpass('Digite a senha de verificação de saque: ', echo_char='*').encode('utf-8')).hexdigest()
             print('Senha correta')
             print(f'Saque liberado. Valor sacado R${valor:,.2f} na conta {self._id}.')
         else:
