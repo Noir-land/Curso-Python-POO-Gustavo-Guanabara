@@ -23,61 +23,72 @@ from hashlib import sha256
 
 
 class ContaBancaria:
-    def __init__(self, id, titular, saldo):
+    def __init__(self, id: int, titular: str, saldo: float, chave: str = None):
         self._id = id
         self._titular = titular
         self.__saldo = saldo
-        self.__hash = None
-        self.pede_senha()
+        if chave is None:
+            self.__hash = None
+            self.pede_senha()
+        if chave is not None:
+            self.__hash = sha256(chave.encode('utf-8')).hexdigest()
 
     @property
     def nome(self):
         return self._titular
 
     @nome.setter
-    def nome(self, msg):
+    def nome(self, msg: str):
         if self.validar_senha() == True:
             print(f'Nome alterado com sucesso. Novo nome: {msg}')
             self._titular = msg
 
     def validar_senha(self, chave: str = None) -> bool:
         if chave is None:
-            chave = sha256(getpass('Digite a senha de verificação ', echo_char='*').encode('utf-8')).hexdigest()
+            chave = sha256(getpass('Digite a senha de verificação ',
+                           echo_char='*').encode('utf-8')).hexdigest()
             if self.__hash == chave:
                 print('Validação bem sucedida.')
                 return True
             else:
-                print('Erro na validação')
+                print('Erro na validação if')
                 return False
         else:
-            chave = sha256(chave.encode('utf-8')).hexdigest()
             if self.__hash == chave:
                 print('Validação bem sucedida.')
                 return True
             else:
-                print('Erro na validação.')
+                print('Erro na validação else.')
                 return False
 
     def pede_senha(self):
         if self.__hash is None:
-            self.__hash = sha256(getpass('Digite a senha: ', echo_char='*').encode('utf-8')).hexdigest()
-            print(f'Titular {self._titular}.Conta {self._id} criada com sucesso. Seu saldo é de R${self.__saldo:,.2f}.')
+            self.__hash = sha256(
+                getpass('Digite a senha: ', echo_char='*').encode('utf-8')).hexdigest()
+            print(
+                f'Titular {self._titular}.Conta {self._id} criada com sucesso. Seu saldo é de R${self.__saldo:,.2f}.')
 
-    def sacar(self, valor: float = 0, chave=None):
+    def sacar(self, valor: float = 0, chave: str = None):
         valor = abs(valor)
-        chave = sha256(getpass('Digite a senha de verificação de saque: ', echo_char='*').encode('utf-8')).hexdigest()
+        if chave is None:
+            chave = sha256(getpass('Digite a senha de verificação de saque: ',
+                           echo_char='*').encode('utf-8')).hexdigest()
+
         if chave is None:
             print('Senha correta')
-            print(f'Saque liberado. Valor sacado R${valor:,.2f} na conta {self._id}.')
+            print(
+                f'Saque liberado. Valor sacado R${valor:,.2f} na conta {self._id}.')
         else:
             if self.validar_senha(chave) == True:
                 self.__saldo -= valor
                 print('Senha correta')
-                print(f'Saque liberado. Valor sacado R${valor:,.2f} na conta {self._id}.')
+                print(
+                    f'Saque liberado. Valor sacado R${valor:,.2f} na conta {self._id}.')
             else:
                 print('Senha incorreta.')
 
-    def depositar(self, valor):
+    def depositar(self, valor: float):
         valor = abs(valor)
         self.__saldo += valor
-        print(f'Deposito efetuado com sucesso. Valor depositado R${valor:,.2f} na conta {self._id}.')
+        print(
+            f'Deposito efetuado com sucesso. Valor depositado R${valor:,.2f} na conta {self._id}.')
